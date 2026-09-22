@@ -11,10 +11,11 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from agent_common.audit import AuditLog
+from agent_common.paths import shared_data_dir
 from mcp.server.mcpserver import MCPServer
 
 from .approvals import ApprovalStore
-from .audit import AuditLog
 from .policy_engine import PolicyEngine
 from .state_store import StateStore
 
@@ -23,6 +24,10 @@ _PACKAGE_DIR = Path(__file__).resolve().parent
 _ORCHESTRATOR_MCP_DIR = _PACKAGE_DIR.parent.parent  # -> mcp/orchestrator-mcp
 _REPO_ROOT = _ORCHESTRATOR_MCP_DIR.parent.parent  # -> documentum-ai-platform
 
+# State and approvals are orchestrator-owned (no other agent has its own
+# copy). The audit log is the one shared trail every agent writes to
+# (mcp/_shared/data/audit.db) so VALIDATOR-MCP's evidence lookups see
+# orchestrator-level events too, not just domain-agent ones.
 _DATA_DIR = Path(os.environ.get("ORCHESTRATOR_MCP_DATA_DIR", _ORCHESTRATOR_MCP_DIR / "data"))
 _POLICIES_DIR = Path(
     os.environ.get("ORCHESTRATOR_MCP_POLICIES_DIR", _REPO_ROOT / "policies")
@@ -30,7 +35,7 @@ _POLICIES_DIR = Path(
 
 state_store = StateStore(_DATA_DIR / "state.db")
 approval_store = ApprovalStore(_DATA_DIR / "approvals.db")
-audit_log = AuditLog(_DATA_DIR / "audit.db")
+audit_log = AuditLog(shared_data_dir(_REPO_ROOT) / "audit.db")
 policy_engine = PolicyEngine(
     approvals_path=_POLICIES_DIR / "approvals.yaml",
     autonomy_path=_POLICIES_DIR / "destructive-actions.yaml",

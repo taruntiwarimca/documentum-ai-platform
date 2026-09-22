@@ -1,0 +1,19 @@
+[project]
+name = "xplore-mcp"
+version = "0.1.0"
+description = "XPLORE-GROK's MCP server: xPlore stand-in with a real local inverted-index search and CS repository dependency enforcement."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=2.0.0",
+    # agent-common is local (mcp/_shared/agent_common): pip install -e ../_shared/agent_common first.
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

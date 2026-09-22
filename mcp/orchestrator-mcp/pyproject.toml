@@ -6,6 +6,7 @@ requires-python = ">=3.10"
 dependencies = [
     "mcp>=2.0.0",
     "pyyaml>=6.0",
+    # agent-common is local (mcp/_shared/agent_common): pip install -e ../_shared/agent_common first.
 ]
 
 [project.optional-dependencies]

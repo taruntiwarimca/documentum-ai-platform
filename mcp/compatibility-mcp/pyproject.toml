@@ -1,0 +1,22 @@
+[project]
+name = "compatibility-mcp"
+version = "0.1.0"
+description = "COMPATIBILITY-GROK's MCP server: stack and Java compatibility gate (ADR-014)."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=2.0.0",
+    "pyyaml>=6.0",
+    # agent-common is a local shared package (mcp/_shared/agent_common), not on
+    # PyPI: install it separately with `pip install -e ../_shared/agent_common`
+    # before installing this package.
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

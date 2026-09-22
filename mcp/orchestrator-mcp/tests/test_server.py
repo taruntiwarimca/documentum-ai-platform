@@ -34,6 +34,9 @@ def server_module(tmp_path, monkeypatch):
     )
     monkeypatch.setenv("ORCHESTRATOR_MCP_DATA_DIR", str(tmp_path / "data"))
     monkeypatch.setenv("ORCHESTRATOR_MCP_POLICIES_DIR", str(tmp_path))
+    # audit_log now lives under the shared data dir (see server.py) so every
+    # agent writes to one trail — isolate that too for this test.
+    monkeypatch.setenv("DOCUMENTUM_AI_PLATFORM_DATA_DIR", str(tmp_path / "shared-data"))
 
     import orchestrator_mcp.server as module
 

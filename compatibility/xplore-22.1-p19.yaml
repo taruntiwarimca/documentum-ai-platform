@@ -1,3 +1,7 @@
-# Support-matrix data for xPlore 22.1 Patch 19. Placeholder —
-# populate from the organization's authoritative OpenText
-# compatibility/release documentation (see target architecture §15).
+# Support-matrix data for xPlore 22.1 Patch 19. See documentum-23.4.yaml
+# for the sourcing caveat: illustrative, not pulled from real OpenText docs.
+component: xplore
+version: "22.1-p19"
+compatible_with:
+  content_server: ["23.4"]
+status: SUPPORTED

@@ -1,3 +1,8 @@
-# Support-matrix data for Documentum Administrator 23.4. Placeholder —
-# populate from the organization's authoritative OpenText
-# compatibility/release documentation (see target architecture §15).
+# Support-matrix data for Documentum Administrator 23.4. See
+# documentum-23.4.yaml for the sourcing caveat.
+component: da
+version: "23.4"
+compatible_with:
+  content_server: ["23.4"]
+  tomcat: ["10"]
+status: SUPPORTED

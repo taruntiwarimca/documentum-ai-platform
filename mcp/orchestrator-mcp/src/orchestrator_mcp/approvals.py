@@ -94,6 +94,17 @@ class ApprovalStore:
         ).fetchall()
         return [dict(zip(_COLUMNS, r)) for r in rows]
 
+    def find_latest(self, operation: str, environment: str) -> dict[str, Any] | None:
+        """Most recent request (any status) for this operation+environment,
+        used by deploy_cli.py to avoid re-filing a duplicate approval on
+        every re-run once one already exists."""
+        row = self._conn.execute(
+            f"SELECT {', '.join(_COLUMNS)} FROM approvals "
+            "WHERE operation=? AND environment=? ORDER BY created_at DESC LIMIT 1",
+            (operation, environment),
+        ).fetchone()
+        return dict(zip(_COLUMNS, row)) if row else None
+
     def decide(self, approval_id: str, status: str, decided_by: str) -> dict[str, Any]:
         if status not in ("APPROVED", "DENIED"):
             raise ValueError("status must be APPROVED or DENIED")

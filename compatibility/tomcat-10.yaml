@@ -1,3 +1,7 @@
-# Support-matrix data for Tomcat 10. Placeholder — populate from
-# the organization's authoritative OpenText compatibility/release
-# documentation (see target architecture §15).
+# Support-matrix data for Tomcat 10. See documentum-23.4.yaml for the
+# sourcing caveat.
+component: tomcat
+version: "10"
+compatible_with:
+  java: ["21", "17"]
+status: SUPPORTED

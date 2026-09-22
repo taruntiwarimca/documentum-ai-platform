@@ -26,6 +26,7 @@ rules:
   - id: otds-identity-source-change
     match:
       operation:
+        - otds.configure_identity_source
         - otds.sync_identity_source
         - otds.create_partition
         - otds.create_mapping

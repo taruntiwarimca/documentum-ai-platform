@@ -1,12 +1,20 @@
 # JAVA-COMPATIBILITY-MATRIX (target architecture §5, ADR-014).
-# Placeholder structure — populate per-version, per-component status
-# (UNKNOWN | VERIFY | SUPPORTED_BY_TOMCAT | SUPPORTED), e.g.:
 #
-# java:
-#   21:
-#     content_server: UNKNOWN
-#     xplore: UNKNOWN
-#     da: VERIFY
-#     tomcat: SUPPORTED_BY_TOMCAT
+# Per-component JDK certification status for each Java version. Tomcat
+# supporting a JDK does not imply every Documentum component deployed to it
+# is certified for that JDK — each is tracked separately, and
+# compatibility.check_java hard-stops if any required component's entry is
+# UNKNOWN or VERIFY rather than assuming support transitively from Tomcat.
 #
-# APP-GROK must hard-stop when any value is UNKNOWN or VERIFY.
+# Values: SUPPORTED | SUPPORTED_BY_TOMCAT | VERIFY | UNKNOWN
+java:
+  "21":
+    content_server: UNKNOWN
+    xplore: UNKNOWN
+    da: VERIFY
+    tomcat: SUPPORTED_BY_TOMCAT
+  "17":
+    content_server: SUPPORTED
+    xplore: SUPPORTED
+    da: SUPPORTED
+    tomcat: SUPPORTED_BY_TOMCAT
