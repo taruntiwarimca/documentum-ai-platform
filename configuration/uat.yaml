@@ -1,0 +1,3 @@
+# Target-state desired-state file for the UAT environment.
+# Placeholder — no UAT environment details were specified during
+# target-architecture design. Structure should mirror dev.yaml.

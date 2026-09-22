@@ -1,0 +1,3 @@
+# Target-state desired-state file for the QA environment.
+# Placeholder — no QA environment details were specified during
+# target-architecture design. Structure should mirror dev.yaml.

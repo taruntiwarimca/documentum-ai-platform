@@ -1,0 +1,12 @@
+# JAVA-COMPATIBILITY-MATRIX (target architecture §5, ADR-014).
+# Placeholder structure — populate per-version, per-component status
+# (UNKNOWN | VERIFY | SUPPORTED_BY_TOMCAT | SUPPORTED), e.g.:
+#
+# java:
+#   21:
+#     content_server: UNKNOWN
+#     xplore: UNKNOWN
+#     da: VERIFY
+#     tomcat: SUPPORTED_BY_TOMCAT
+#
+# APP-GROK must hard-stop when any value is UNKNOWN or VERIFY.

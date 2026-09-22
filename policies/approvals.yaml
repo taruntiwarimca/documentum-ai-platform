@@ -1,0 +1,6 @@
+# Human approval gate rules (ADR-005): destructive production
+# operations, privileged IAM changes, identity-source changes,
+# certificate-trust changes, and repository deletion require
+# approval. Also applies to the APPROVAL? step of the diagnostic
+# pattern (target architecture §12, ADR-018), not just deployment.
+# Placeholder — not yet expressed as structured policy data.

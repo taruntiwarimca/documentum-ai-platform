@@ -1,0 +1,4 @@
+# Per-agent tool permissions. Placeholder — the enforced source
+# today is ../../documentum-ai-platform-poc/config/mcp-tools.yaml's
+# per-server allowed_tools lists. This file should formalize the
+# target tool surfaces documented per-agent under ../agents/.

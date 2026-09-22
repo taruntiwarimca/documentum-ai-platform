@@ -1,0 +1,8 @@
+# Target-state desired-state file for the DEV environment.
+# Placeholder — not yet populated. Base this on the POC's
+# ../../documentum-ai-platform-poc/config/desired-state.yaml,
+# which already covers DCTM-DEV (Oracle/CS/xPlore/Tomcat/OTDS hosts,
+# repository, docbroker port, OTDS identity source, vault secret refs).
+# Per target architecture §16.4, extend it toward resource-list
+# modeling for CS repositories / xPlore collections rather than
+# single blocks.

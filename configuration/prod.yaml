@@ -1,0 +1,5 @@
+# Target-state desired-state file for the PROD environment.
+# Placeholder — no PROD environment details were specified during
+# target-architecture design. Structure should mirror dev.yaml.
+# Remember: production_destructive_actions require human approval
+# (ADR-005) and higher autonomy-level restrictions apply (ADR-009).
