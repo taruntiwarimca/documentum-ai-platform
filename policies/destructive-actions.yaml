@@ -1,4 +1,38 @@
-# Graduated autonomy levels (L0-L4, ADR-009) enforced by policy,
-# environment, and operation type. Production destructive operations
-# remain approval-gated regardless of autonomy level. Placeholder —
-# not yet expressed as structured policy data.
+# ADR-009 — Graduated Autonomy (L0-L4)
+#
+# `environment_max_autonomy` caps how autonomously ORCHESTRATOR-GROK may act
+# in a given environment. Each requested operation has an `operation_class`
+# (read/write/destructive/privileged) with a required autonomy level; the
+# operation is only autonomously allowed if that required level is at or
+# below the environment's max.
+#
+# `always_gate_in_prod` lists operation classes that always require human
+# approval when environment == PROD, regardless of autonomy level — this is
+# the ADR-005 backstop layered on top of the autonomy check.
+#
+# Consumed by mcp/orchestrator-mcp/src/orchestrator_mcp/policy_engine.py's
+# `policy.check` tool.
+
+levels:
+  L0: "No autonomous action; every operation requires explicit human execution."
+  L1: "Read-only / diagnostic operations only."
+  L2: "Non-destructive writes in non-production environments."
+  L3: "Destructive writes in non-production environments; non-destructive writes in production."
+  L4: "Full autonomy including destructive production operations (still subject to ADR-005 approval gates)."
+
+operation_class_required_level:
+  read: L1
+  write: L2
+  destructive: L3
+  privileged: L4
+
+environment_max_autonomy:
+  DCTM-DEV: L3
+  DEV: L3
+  QA: L3
+  UAT: L2
+  PROD: L1
+
+always_gate_in_prod:
+  - destructive
+  - privileged

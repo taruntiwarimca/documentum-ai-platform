@@ -1,6 +1,47 @@
-# Human approval gate rules (ADR-005): destructive production
-# operations, privileged IAM changes, identity-source changes,
-# certificate-trust changes, and repository deletion require
-# approval. Also applies to the APPROVAL? step of the diagnostic
-# pattern (target architecture §12, ADR-018), not just deployment.
-# Placeholder — not yet expressed as structured policy data.
+# ADR-005 — Human Approval Gates
+#
+# Rules are evaluated in order; the first rule whose `match` criteria all hold
+# wins. `match.operation` may be a single operation name or a list. If no rule
+# matches, `default_requires_approval` applies.
+#
+# Consumed by mcp/orchestrator-mcp/src/orchestrator_mcp/policy_engine.py's
+# `policy.check` tool.
+
+default_requires_approval: false
+
+rules:
+  - id: destructive-in-prod
+    match:
+      environment: PROD
+      operation_class: destructive
+    requires_approval: true
+    reason: "Destructive operations in production require human approval (ADR-005)."
+
+  - id: privileged-iam-change
+    match:
+      operation_class: privileged
+    requires_approval: true
+    reason: "Privileged IAM changes require human approval (ADR-005)."
+
+  - id: otds-identity-source-change
+    match:
+      operation:
+        - otds.sync_identity_source
+        - otds.create_partition
+        - otds.create_mapping
+        - otds.register_client
+    requires_approval: true
+    reason: "Identity-source changes require human approval (ADR-003, ADR-005)."
+
+  - id: cert-trust-change
+    match:
+      operation: otds.validate_tls
+      operation_class: destructive
+    requires_approval: true
+    reason: "Certificate trust changes require human approval (ADR-005)."
+
+  - id: repository-deletion
+    match:
+      operation: cs.delete_repository
+    requires_approval: true
+    reason: "Repository deletion requires human approval (ADR-005)."
